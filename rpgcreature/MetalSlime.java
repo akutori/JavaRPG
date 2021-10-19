@@ -6,7 +6,7 @@ import java.util.Random;
  * メタルスライムクラス
  */
 public class MetalSlime extends Monster{
-    private final static int ESCAPE_RATE = 400;
+    private final static int ESCAPE_RATE = 40;
     
     /**
      * メタルスライムのコンストラクタ
