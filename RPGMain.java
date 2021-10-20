@@ -15,6 +15,7 @@ public class RPGMain {
     private final int MONSTER_NUM = 3;
     private final int COMMAND_BATTLE = 1;
     private final int COMMAND_RECOVERY = 2;
+    private int GAME_TURN = 1;
 
     private Braver braver;
     private Monster[] monsters;
@@ -32,6 +33,8 @@ public class RPGMain {
 
         // タイトル表示
         dispTitle();
+
+        // ターン表示
 
         // 名前入力
         Scanner sc = new Scanner(System.in);
@@ -52,24 +55,21 @@ public class RPGMain {
             dispStatus();
             // 入力されたコマンドを取得
             Boolean flg = false;
-            while (flg = false) {
-                int command = sc.nextInt();
-                if (command != 1 || command != 2) {
-                    System.out.println("1または2を入力してください");
-                } else {
-                    flg = true;
-                }
-            }
+
+            int command = sc.nextInt();
 
             if (command == COMMAND_BATTLE) {
                 // たたかう
                 if (!battle()) {
                     break;
                 }
-            } else {
+            } else if (command == COMMAND_RECOVERY) {
                 // 回復する
                 braver.recovery();
+            } else {
+                System.out.println("１又は２を入力してください");
             }
+
         }
 
         sc.close();
@@ -93,6 +93,11 @@ public class RPGMain {
         System.out.println("==========================");
     }
 
+    private void turn() {
+        System.out.printf("=%dターン目               =\n", GAME_TURN);
+        GAME_TURN++;
+    }
+
     /**
      * 現在の状態を表示する
      */
@@ -100,6 +105,7 @@ public class RPGMain {
         System.out.println("==========================");
         System.out.printf("= %s                 =\n", braver.getName());
         System.out.printf("= HP:%3d                 =\n", braver.getHp());
+        turn();
         System.out.println("==========================");
         System.out.println("どうしますか？1:たたかう 2:回復");
     }
