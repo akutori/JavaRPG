@@ -51,7 +51,16 @@ public class RPGMain {
             // 現在の状態を表示
             dispStatus();
             // 入力されたコマンドを取得
-            int command = sc.nextInt();
+            Boolean flg = false;
+            while (flg = false) {
+                int command = sc.nextInt();
+                if (command != 1 || command != 2) {
+                    System.out.println("1または2を入力してください");
+                } else {
+                    flg = true;
+                }
+            }
+
             if (command == COMMAND_BATTLE) {
                 // たたかう
                 if (!battle()) {
@@ -108,10 +117,10 @@ public class RPGMain {
                 monsters[i] = new Slime();
             } else if (value == 1) {
                 monsters[i] = new Wizard();
-            } else if(value==2) {
+            } else if (value == 2) {
                 monsters[i] = new MetalSlime();
             } else {
-            	monsters[i] = new Golem();
+                monsters[i] = new Golem();
             }
         }
 
@@ -150,10 +159,10 @@ public class RPGMain {
 
         // モンスター→主人公からの攻撃
         for (int i = 0; i < MONSTER_NUM; i++) {
-        	if(monsters[i].isThere()!= false && monsters[i].isAlive()!=false) {
-        		monsters[i].attack(braver);
-        	}
-            
+            if (monsters[i].isThere() != false && monsters[i].isAlive() != false) {
+                monsters[i].attack(braver);
+            }
+
         }
 
         // 主人公が死んだか？
